@@ -19,22 +19,23 @@
 </style>
 <h1>Codex pointing benchmark</h1>
 <p class="note">Each model gets an image and a phrase and returns one point (<code>POINT: x, y</code>).<br>Hit = the point lands in the target box.<br>Every prompt is run 3 times.</p>
-<p class="note">67 prompts, 12 LIBERO scenes: bowl-to-plate, pick-into-basket, open-drawer, cleanup.</p>
+<p class="note">65 prompts across 12 LIBERO scenes: bowl-to-plate, pick-into-basket, open-drawer, cleanup.</p>
 <h2>Results <span class="sub">(medium reasoning, 3 runs each)</span></h2>
 <table><tr><th>Model</th><th>Hit rate</th><th>Solid (3/3)</th><th>Flaky</th><th>Miss (0/3)</th></tr>
-<tr><td>Terra</td><td>183/201 (91%)</td><td>59/67</td><td>3</td><td>5</td></tr>
-<tr><td>Sol</td><td>183/201 (91%)</td><td>59/67</td><td>3</td><td>5</td></tr>
-<tr><td>Luna</td><td>183/201 (91%)</td><td>60/67</td><td>3</td><td>4</td></tr>
+<tr><td>Terra</td><td>193/195 (99%)</td><td>63/65</td><td>2</td><td>0</td></tr>
+<tr><td>Sol</td><td>195/195 (100%)</td><td>65/65</td><td>0</td><td>0</td></tr>
+<tr><td>Luna</td><td>195/195 (100%)</td><td>65/65</td><td>0</td><td>0</td></tr>
 </table>
+<p class="note">Ground truth corrected on review: two contradictory prompts dropped and a few misplaced target boxes fixed, then re-scored on the same model outputs. Terra's 2 remaining misses are genuine borderline near-misses.</p>
 <h2>By prompt type</h2>
 <table><tr><th>Prompt type</th><th>Terra</th><th>Sol</th><th>Luna</th></tr>
 <tr><td><b>Disambiguation</b><br><span class="sub">the right one of two identical bowls &middot; &ldquo;the bowl between the plate and the ramekin&rdquo;</span></td><td>6/6 (100%)</td><td>6/6 (100%)</td><td>6/6 (100%)</td></tr>
 <tr><td><b>Elevated object</b><br><span class="sub">an object raised off the table &middot; &ldquo;the bowl on top of the cabinet&rdquo;</span></td><td>15/15 (100%)</td><td>15/15 (100%)</td><td>15/15 (100%)</td></tr>
 <tr><td><b>Empty space</b><br><span class="sub">a location, not an object (only pointing can do this) &middot; &ldquo;the empty floor inside the open drawer&rdquo;</span></td><td>23/24 (96%)</td><td>24/24 (100%)</td><td>24/24 (100%)</td></tr>
 <tr><td><b>Fine distinction</b><br><span class="sub">similar shapes told apart &middot; &ldquo;the ramekin, not the bowls&rdquo;</span></td><td>12/12 (100%)</td><td>12/12 (100%)</td><td>12/12 (100%)</td></tr>
-<tr><td><b>Drawer handle</b><br><span class="sub">a small part of an object &middot; &ldquo;the handle on the open drawer&rdquo;</span></td><td>14/21 (67%)</td><td>12/21 (57%)</td><td>12/21 (57%)</td></tr>
-<tr><td><b>Plain object</b><br><span class="sub">one clearly named item &middot; &ldquo;the milk carton&rdquo;</span></td><td>68/75 (91%)</td><td>69/75 (92%)</td><td>69/75 (92%)</td></tr>
-<tr><td><b>Referent</b><br><span class="sub">the right item among clutter &middot; &ldquo;the alphabet soup can&rdquo;</span></td><td>45/48 (94%)</td><td>45/48 (94%)</td><td>45/48 (94%)</td></tr>
+<tr><td><b>Drawer handle</b><br><span class="sub">a small part of an object &middot; &ldquo;the handle on the open drawer&rdquo;</span></td><td>15/15 (100%)</td><td>15/15 (100%)</td><td>15/15 (100%)</td></tr>
+<tr><td><b>Plain object</b><br><span class="sub">one clearly named item &middot; &ldquo;the milk carton&rdquo;</span></td><td>74/75 (99%)</td><td>75/75 (100%)</td><td>75/75 (100%)</td></tr>
+<tr><td><b>Referent</b><br><span class="sub">the right item among clutter &middot; &ldquo;the alphabet soup can&rdquo;</span></td><td>48/48 (100%)</td><td>48/48 (100%)</td><td>48/48 (100%)</td></tr>
 </table>
 <h2>Overlays</h2>
 <div class="frow"><span class="flabel">Type</span><button class="f active" data-g="cat" data-f="all">All</button>
@@ -52,405 +53,393 @@
 <div id="rows">
 <div class="prow" data-cat="disambig" data-miss="0">
 <div class="plabel">the black speckled bowl between the white plate with red rings and the metallic ramekin <span class="sub">[Disambiguation]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/00.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/00.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/00.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/00.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/00.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/00.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the white plate with red rings <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/01.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/01.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/01.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/01.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/01.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/01.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="fine-distinction" data-miss="0">
 <div class="plabel">the metallic ramekin <span class="sub">[Fine distinction]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/02.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/02.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/02.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/02.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/02.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/02.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the small colorful cookies box on the table <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/03.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/03.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/03.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/03.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/03.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/03.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="elevated" data-miss="0">
 <div class="plabel">the black speckled bowl on top of the dark cabinet <span class="sub">[Elevated object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/04.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/04.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/04.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/04.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/04.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/04.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="elevated" data-miss="0">
 <div class="plabel">the black speckled bowl on the stove burner <span class="sub">[Elevated object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/05.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/05.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/05.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/05.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/05.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/05.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the white plate with red rings <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/06.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/06.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/06.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/06.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/06.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/06.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
-<div class="prow" data-cat="part" data-miss="1">
+<div class="prow" data-cat="part" data-miss="0">
 <div class="plabel">the metallic drawer handle on the dark cabinet <span class="sub">[Drawer handle]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/07.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/07.png"><figcaption><b>Sol</b> 2/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/07.png"><figcaption><b>Luna</b> 0/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/07.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/07.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/07.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="part" data-miss="0">
 <div class="plabel">the center of the handle on the open bottom drawer <span class="sub">[Drawer handle]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/08.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/08.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/08.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/08.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/08.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/08.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="empty-space" data-miss="0">
 <div class="plabel">the center of the empty floor inside the open bottom drawer <span class="sub">[Empty space]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/09.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/09.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/09.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/09.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/09.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/09.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the metallic bowl on the table <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/10.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/10.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/10.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/10.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/10.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/10.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the green wine bottle <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/11.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/11.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/11.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/11.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/11.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/11.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the alphabet soup can <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/12.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/12.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/12.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/12.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/12.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/12.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="empty-space" data-miss="0">
 <div class="plabel">the center of the opening inside the woven basket <span class="sub">[Empty space]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/13.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/13.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/13.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/13.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/13.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/13.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the milk carton <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/14.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/14.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/14.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/14.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/14.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/14.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the dark salad dressing bottle <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/15.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/15.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/15.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/15.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/15.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/15.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the orange ketchup bottle <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/16.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/16.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/16.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/16.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/16.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/16.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the tomato can <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/17.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/17.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/17.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/17.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/17.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/17.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="empty-space" data-miss="0">
 <div class="plabel">the center of the opening inside the woven basket <span class="sub">[Empty space]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/18.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/18.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/18.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/18.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/18.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/18.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the juice carton <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/19.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/19.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/19.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/19.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/19.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/19.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the can with the blue and yellow label <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/20.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/20.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/20.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/20.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/20.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/20.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the striped tomato sauce can <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/21.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/21.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/21.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/21.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/21.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/21.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="empty-space" data-miss="0">
 <div class="plabel">the center of the opening inside the woven basket <span class="sub">[Empty space]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/22.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/22.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/22.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/22.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/22.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/22.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the blue box on the table <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/23.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/23.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/23.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/23.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/23.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/23.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="disambig" data-miss="0">
 <div class="plabel">the black speckled bowl in the back right, farthest from the plate <span class="sub">[Disambiguation]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/24.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/24.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/24.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/24.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/24.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/24.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the black stove burner <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/25.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/25.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/25.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/25.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/25.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/25.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="fine-distinction" data-miss="0">
 <div class="plabel">the metallic ramekin <span class="sub">[Fine distinction]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/26.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/26.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/26.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/26.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/26.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/26.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the small colorful cookies box on the table <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/27.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/27.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/27.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
-</div></div>
-<div class="prow" data-cat="part" data-miss="1">
-<div class="plabel">the right handle on the open bottom drawer <span class="sub">[Drawer handle]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/28.png"><figcaption><b>Terra</b> 0/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/28.png"><figcaption><b>Sol</b> 0/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/28.png"><figcaption><b>Luna</b> 1/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/27.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/27.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/27.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the wooden boards on the left side of the table <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/29.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/29.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/29.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/29.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/29.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/29.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the woven basket <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/30.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/30.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/30.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/30.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/30.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/30.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the woven basket <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/31.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/31.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/31.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/31.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/31.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/31.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
-<div class="prow" data-cat="object" data-miss="1">
+<div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the small box on the left side of the table <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/32.png"><figcaption><b>Terra</b> 0/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/32.png"><figcaption><b>Sol</b> 0/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/32.png"><figcaption><b>Luna</b> 0/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/32.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/32.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/32.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the striped can with the green and red label <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/33.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/33.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/33.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/33.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/33.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/33.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the small box in front between the cans <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/34.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/34.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/34.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/34.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/34.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/34.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="elevated" data-miss="0">
 <div class="plabel">the black speckled bowl on top of the dark cabinet <span class="sub">[Elevated object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/35.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/35.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/35.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/35.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/35.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/35.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="elevated" data-miss="0">
 <div class="plabel">the black speckled bowl sitting on the colorful cookies box <span class="sub">[Elevated object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/36.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/36.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/36.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/36.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/36.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/36.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="fine-distinction" data-miss="0">
 <div class="plabel">the metallic ramekin <span class="sub">[Fine distinction]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/37.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/37.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/37.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/37.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/37.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/37.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the white plate with red rings <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/38.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/38.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/38.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/38.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/38.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/38.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the colorful cookies box under the center bowl <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/39.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/39.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/39.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/39.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/39.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/39.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
-<div class="prow" data-cat="part" data-miss="1">
+<div class="prow" data-cat="part" data-miss="0">
 <div class="plabel">the metallic drawer handle on the dark cabinet <span class="sub">[Drawer handle]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/40.png"><figcaption><b>Terra</b> 2/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/40.png"><figcaption><b>Sol</b> 2/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/40.png"><figcaption><b>Luna</b> 1/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/40.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/40.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/40.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="elevated" data-miss="0">
 <div class="plabel">the black speckled bowl on the stove burner <span class="sub">[Elevated object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/41.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/41.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/41.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/41.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/41.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/41.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the black speckled bowl flat on the table in front <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/42.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/42.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/42.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/42.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/42.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/42.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="fine-distinction" data-miss="0">
 <div class="plabel">the metallic ramekin <span class="sub">[Fine distinction]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/43.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/43.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/43.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/43.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/43.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/43.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the white plate with red rings <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/44.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/44.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/44.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/44.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/44.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/44.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="1">
 <div class="plabel">the colorful cookies box on the table <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/45.png"><figcaption><b>Terra</b> 2/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/45.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/45.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/45.png"><figcaption><b>Terra</b> 2/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/45.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/45.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
-<div class="prow" data-cat="part" data-miss="1">
+<div class="prow" data-cat="part" data-miss="0">
 <div class="plabel">the metallic drawer handle on the dark cabinet <span class="sub">[Drawer handle]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/46.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/46.png"><figcaption><b>Sol</b> 2/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/46.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/46.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/46.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/46.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="part" data-miss="0">
 <div class="plabel">the center of the handle on the open bottom drawer <span class="sub">[Drawer handle]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/47.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/47.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/47.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
-</div></div>
-<div class="prow" data-cat="part" data-miss="1">
-<div class="plabel">the right handle on the open bottom drawer <span class="sub">[Drawer handle]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/48.png"><figcaption><b>Terra</b> 0/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/48.png"><figcaption><b>Sol</b> 0/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/48.png"><figcaption><b>Luna</b> 1/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/47.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/47.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/47.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="empty-space" data-miss="1">
 <div class="plabel">the center of the empty floor inside the open bottom drawer <span class="sub">[Empty space]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/49.png"><figcaption><b>Terra</b> 2/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/49.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/49.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/49.png"><figcaption><b>Terra</b> 2/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/49.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/49.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the metallic bowl on the table <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/50.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/50.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/50.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/50.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/50.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/50.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the green wine bottle <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/51.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/51.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/51.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/51.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/51.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/51.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the alphabet soup can <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/52.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/52.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/52.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/52.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/52.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/52.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="empty-space" data-miss="0">
 <div class="plabel">the center of the opening inside the woven basket <span class="sub">[Empty space]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/53.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/53.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/53.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/53.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/53.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/53.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the milk carton <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/54.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/54.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/54.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/54.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/54.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/54.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the dark salad dressing bottle <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/55.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/55.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/55.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/55.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/55.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/55.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
-<div class="prow" data-cat="object" data-miss="1">
+<div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the small blue box <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/56.png"><figcaption><b>Terra</b> 0/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/56.png"><figcaption><b>Sol</b> 0/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/56.png"><figcaption><b>Luna</b> 0/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/56.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/56.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/56.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the orange ketchup bottle <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/57.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/57.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/57.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/57.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/57.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/57.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the tomato can <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/58.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/58.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/58.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/58.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/58.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/58.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="empty-space" data-miss="0">
 <div class="plabel">the center of the opening inside the woven basket <span class="sub">[Empty space]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/59.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/59.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/59.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/59.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/59.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/59.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the juice carton <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/60.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/60.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/60.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/60.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/60.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/60.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
-<div class="prow" data-cat="referent" data-miss="1">
+<div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the dark barbecue sauce bottle <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/61.png"><figcaption><b>Terra</b> 0/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/61.png"><figcaption><b>Sol</b> 0/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/61.png"><figcaption><b>Luna</b> 0/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/61.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/61.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/61.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the can with the blue and yellow label <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/62.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/62.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/62.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/62.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/62.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/62.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the striped can with the green and red label <span class="sub">[Referent]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/63.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/63.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/63.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/63.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/63.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/63.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="empty-space" data-miss="0">
 <div class="plabel">the center of the opening inside the woven basket <span class="sub">[Empty space]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/64.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/64.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/64.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/64.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/64.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/64.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the blue box on the table <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/65.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/65.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/65.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/65.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/65.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/65.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the small box in front between the cans <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench2/gpt-5.6-terra_medium_k3/66.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-sol_medium_k3/66.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench2/gpt-5.6-luna_medium_k3/66.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/66.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/66.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/66.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 </div>
 <script>
