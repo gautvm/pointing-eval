@@ -19,22 +19,22 @@
 </style>
 <h1>Codex pointing benchmark</h1>
 <p class="note">Each model gets an image and a phrase and returns one point (<code>POINT: x, y</code>).<br>Hit = the point lands in the target box.<br>Every prompt is run 3 times.</p>
-<p class="note">65 prompts across 12 LIBERO scenes: bowl-to-plate, pick-into-basket, open-drawer, cleanup.</p>
+<p class="note">66 prompts across 12 LIBERO scenes: bowl-to-plate, pick-into-basket, open-drawer, cleanup.</p>
 <h2>Results <span class="sub">(medium reasoning, 3 runs each)</span></h2>
 <table><tr><th>Model</th><th>Hit rate</th><th>Solid (3/3)</th><th>Flaky</th><th>Miss (0/3)</th></tr>
-<tr><td>Terra</td><td>193/195 (99%)</td><td>63/65</td><td>2</td><td>0</td></tr>
-<tr><td>Sol</td><td>195/195 (100%)</td><td>65/65</td><td>0</td><td>0</td></tr>
-<tr><td>Luna</td><td>195/195 (100%)</td><td>65/65</td><td>0</td><td>0</td></tr>
+<tr><td>Terra</td><td>196/198 (99%)</td><td>64/66</td><td>2</td><td>0</td></tr>
+<tr><td>Sol</td><td>194/198 (98%)</td><td>64/66</td><td>1</td><td>1</td></tr>
+<tr><td>Luna</td><td>197/198 (99%)</td><td>65/66</td><td>1</td><td>0</td></tr>
 </table>
-<p class="note">Ground truth corrected on review: two contradictory prompts dropped and a few misplaced target boxes fixed, then re-scored on the same model outputs. Terra's 2 remaining misses are genuine borderline near-misses.</p>
+<p class="note">Ground truth corrected by a fixed rule: prompts resolvable from the image were kept and their boxes fixed (e.g. "the right handle" scored strictly against the right-side handle, so pointing at the left handle counts as a miss); one genuinely ambiguous prompt was dropped. Re-scored on the same model outputs.</p>
 <h2>By prompt type</h2>
 <table><tr><th>Prompt type</th><th>Terra</th><th>Sol</th><th>Luna</th></tr>
 <tr><td><b>Disambiguation</b><br><span class="sub">the right one of two identical bowls &middot; &ldquo;the bowl between the plate and the ramekin&rdquo;</span></td><td>6/6 (100%)</td><td>6/6 (100%)</td><td>6/6 (100%)</td></tr>
 <tr><td><b>Elevated object</b><br><span class="sub">an object raised off the table &middot; &ldquo;the bowl on top of the cabinet&rdquo;</span></td><td>15/15 (100%)</td><td>15/15 (100%)</td><td>15/15 (100%)</td></tr>
 <tr><td><b>Empty space</b><br><span class="sub">a location, not an object (only pointing can do this) &middot; &ldquo;the empty floor inside the open drawer&rdquo;</span></td><td>23/24 (96%)</td><td>24/24 (100%)</td><td>24/24 (100%)</td></tr>
 <tr><td><b>Fine distinction</b><br><span class="sub">similar shapes told apart &middot; &ldquo;the ramekin, not the bowls&rdquo;</span></td><td>12/12 (100%)</td><td>12/12 (100%)</td><td>12/12 (100%)</td></tr>
-<tr><td><b>Drawer handle</b><br><span class="sub">a small part of an object &middot; &ldquo;the handle on the open drawer&rdquo;</span></td><td>15/15 (100%)</td><td>15/15 (100%)</td><td>15/15 (100%)</td></tr>
-<tr><td><b>Plain object</b><br><span class="sub">one clearly named item &middot; &ldquo;the milk carton&rdquo;</span></td><td>74/75 (99%)</td><td>75/75 (100%)</td><td>75/75 (100%)</td></tr>
+<tr><td><b>Drawer handle</b><br><span class="sub">a small part of an object &middot; &ldquo;the handle on the open drawer&rdquo;</span></td><td>21/21 (100%)</td><td>17/21 (81%)</td><td>20/21 (95%)</td></tr>
+<tr><td><b>Plain object</b><br><span class="sub">one clearly named item &middot; &ldquo;the milk carton&rdquo;</span></td><td>71/72 (99%)</td><td>72/72 (100%)</td><td>72/72 (100%)</td></tr>
 <tr><td><b>Referent</b><br><span class="sub">the right item among clutter &middot; &ldquo;the alphabet soup can&rdquo;</span></td><td>48/48 (100%)</td><td>48/48 (100%)</td><td>48/48 (100%)</td></tr>
 </table>
 <h2>Overlays</h2>
@@ -219,6 +219,12 @@
 <figure><img src="bench3/gpt-5.6-sol_medium_k3/27.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
 <figure><img src="bench3/gpt-5.6-luna_medium_k3/27.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
+<div class="prow" data-cat="part" data-miss="1">
+<div class="plabel">the right handle on the open bottom drawer <span class="sub">[Drawer handle]</span></div><div class="imgs">
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/28.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/28.png"><figcaption><b>Sol</b> 0/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/28.png"><figcaption><b>Luna</b> 2/3</figcaption></figure>
+</div></div>
 <div class="prow" data-cat="object" data-miss="0">
 <div class="plabel">the wooden boards on the left side of the table <span class="sub">[Plain object]</span></div><div class="imgs">
 <figure><img src="bench3/gpt-5.6-terra_medium_k3/29.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
@@ -236,12 +242,6 @@
 <figure><img src="bench3/gpt-5.6-terra_medium_k3/31.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
 <figure><img src="bench3/gpt-5.6-sol_medium_k3/31.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
 <figure><img src="bench3/gpt-5.6-luna_medium_k3/31.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
-</div></div>
-<div class="prow" data-cat="object" data-miss="0">
-<div class="plabel">the small box on the left side of the table <span class="sub">[Plain object]</span></div><div class="imgs">
-<figure><img src="bench3/gpt-5.6-terra_medium_k3/32.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
-<figure><img src="bench3/gpt-5.6-sol_medium_k3/32.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
-<figure><img src="bench3/gpt-5.6-luna_medium_k3/32.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="referent" data-miss="0">
 <div class="plabel">the striped can with the green and red label <span class="sub">[Referent]</span></div><div class="imgs">
@@ -332,6 +332,12 @@
 <figure><img src="bench3/gpt-5.6-terra_medium_k3/47.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
 <figure><img src="bench3/gpt-5.6-sol_medium_k3/47.png"><figcaption><b>Sol</b> 3/3</figcaption></figure>
 <figure><img src="bench3/gpt-5.6-luna_medium_k3/47.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
+</div></div>
+<div class="prow" data-cat="part" data-miss="1">
+<div class="plabel">the right handle on the open bottom drawer <span class="sub">[Drawer handle]</span></div><div class="imgs">
+<figure><img src="bench3/gpt-5.6-terra_medium_k3/48.png"><figcaption><b>Terra</b> 3/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-sol_medium_k3/48.png"><figcaption><b>Sol</b> 2/3</figcaption></figure>
+<figure><img src="bench3/gpt-5.6-luna_medium_k3/48.png"><figcaption><b>Luna</b> 3/3</figcaption></figure>
 </div></div>
 <div class="prow" data-cat="empty-space" data-miss="1">
 <div class="plabel">the center of the empty floor inside the open bottom drawer <span class="sub">[Empty space]</span></div><div class="imgs">
